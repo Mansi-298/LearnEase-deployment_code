@@ -38,7 +38,7 @@ app.use("/api/v1/progress", courseProgressRoute);
  
 app.use(express.static(path.join(_dirname, "/client/dist")))
 app.get('*', (_, res) => {
-    res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"));
+    res.sendFile(path.resolve(_dirname, "client", "dist", "index.html"));
 });
 
 app.listen(PORT, () => {
