@@ -8,6 +8,9 @@ import courseRoute from "./routes/course.route.js";
 import mediaRoute from "./routes/media.route.js";
 import purchaseRoute from "./routes/purchaseCourse.route.js";
 import courseProgressRoute from "./routes/courseProgress.route.js";
+import path from "path";
+
+const _dirname = path.resolve();
 
 dotenv.config({});
 
@@ -33,7 +36,11 @@ app.use("/api/v1/course", courseRoute);
 app.use("/api/v1/purchase", purchaseRoute);
 app.use("/api/v1/progress", courseProgressRoute);
  
- 
+app.use(express.static(path.join(_dirname, "/client/dist")))
+app.get('*', (_, res) => {
+    res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"));
+});
+
 app.listen(PORT, () => {
     console.log(`Server listen at port ${PORT}`);
 })
